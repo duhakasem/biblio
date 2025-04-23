@@ -1,3 +1,49 @@
+# Setting Up a Basic Express App
+
+## 1. Initialize Node.js Project
+```bash
+npm init
+```
+Follow the prompts to set up your package.json file.
+
+## 2. Install Express
+```bash
+npm install express
+```
+
+## 3. Set Up .gitignore
+Create a .gitignore file to exclude node_modules from version control:
+```bash
+touch .gitignore
+echo "node_modules/" >> .gitignore
+```
+
+## 4. Create index.js
+Create a file named index.js. Example contents:
+
+```bash
+const express = require("express");
+const server = express();
+const port = 3001;
+
+server.get("/hello", function (req, res) {
+    res.send("Hello!");
+});
+
+server.listen(port, function () {
+    console.log("Express listening on " + port);
+});
+```
+
+## 5. Run the App:
+Start the server using:
+```bash
+node index.js
+```
+
+### Access at: http://localhost:3001/hello
+---
+
 # Installing Docker & Running an Express App
 
 ## Install Docker
@@ -8,7 +54,7 @@ Download and install Docker Desktop:
 
 ## Single Container Setup
 
-### 1. Create a Dockerfiles
+### 1. Create a Dockerfile
 
 Add the following to a file named Dockerfile:
 
@@ -65,7 +111,7 @@ mkdir public_html
 Put any static HTML files (e.g. index.html) you want to serve in here.
 
 ### 2. Update default.conf.template
-Use the [default.conf.template](https://github.com/htw-imi-wt1/lab-02-express-docker/blob/main/sample-docker/nginx/templates/default.conf.template) and ensure to include the floolowing block in server block to serve files from /doc:
+Use the [default.conf.template](https://github.com/htw-imi-wt1/lab-02-express-docker/blob/main/sample-docker/nginx/templates/default.conf.template) and ensure to include the following block in server block:
 ```
 location /doc/ {
     alias /usr/share/nginx/html/;
@@ -84,9 +130,9 @@ Services:
          - ./public_html:/usr/share/nginx/html
 ```
 
-### 4.  Restart Docker Compose
+### 4.  Start Docker Compose
 ```
-docker-compose -f sample-docker/compose.yml up --build
+docker compose up --build -d
 ```
 
 ### Access at http://localhost/doc 
