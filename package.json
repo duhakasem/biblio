@@ -8,8 +8,17 @@
   },
   "author": "Duha Kasem, Nhi Phan, Santiago Badaya Prieto, Vanessa Pest",
   "license": "MIT",
-  "description": "",
+  "description": "```bash\r npm init\r ```\r Follow the prompts to set up your package.json file.",
   "dependencies": {
     "express": "^5.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duhakasem/biblio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/duhakasem/biblio/issues"
+  },
+  "homepage": "https://github.com/duhakasem/biblio#readme",
+  "devDependencies": {}
 }
