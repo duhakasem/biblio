@@ -1,19 +1,23 @@
-const express = require("express");
+import express from "express";
+import { create} from "express-handlebars"; 
+import fs from "fs";
+const books = JSON.parse(fs.readFileSync("./public/library.json", "utf-8"));
 const server = express();
 const port = 3001;
 
-server.get("/", function (req, res) {
-    res.send(`
-        <h1>Welcome to the homepage!</h1>
-        <p><a href="/hello">Go to /hello</a></p>
-    `);
-});
+const hbs = create({});
 
-server.get("/hello", function (req, res) {
-    res.send("Hello IMIs!");
-});
+server.engine("handlebars", hbs.engine);
+server.set("view engine", "handlebars");
+server.set("views", "./views");
 
+server.use(express.static("public"));
+
+server.get("/feed", function (req, res) {
+    res.render("feed", { books });
+});;
 
 server.listen(port, function () {
     console.log("Express listening on " + port);
 });
+

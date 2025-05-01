@@ -1,0 +1,106 @@
+[
+    {
+    "book_id": 1,
+    "title": "As long as the lemon trees grow",
+    "author": "Zoulfa Katouh",
+    "image_url": "https://images.thalia.media/-/BF2000-2000/a5014a7865424d85a2a8d60d72d9ff33/as-long-as-the-lemon-trees-grow-gebundene-ausgabe-zoulfa-katouh-englisch.jpeg",
+    "description": "A powerful and heartbreaking story of love, loss, and the resilience of the human spirit, set against the backdrop of the Syrian civil war.",
+    "genre": "Fiction",
+    "publication_year": 2022,
+    "language": "English",
+    "pages": 368,
+    "rating": 4.5,
+    "reviews": [
+        {
+            "review_id": 1,
+            "reviewer": "Alice Smith",
+            "review_text": "An emotional rollercoaster that beautifully captures the struggles of war and the strength of love.",
+            "review_date": "2022-05-15",
+            "review_rating": 5
+        }
+    ]
+},
+{  
+    "book_id": 2,
+    "title": "The Midnight Library",
+    "author": "Matt Haig",
+    "image_url": "https://covers.libro.fm/9781443462815_1120.jpg",
+    "description": "A fascinating exploration of life, death, and all the choices that could have been made, as a woman finds herself in a library that lets her explore alternate lives.",
+    "genre": "Fantasy, Fiction",
+    "publication_year": 2020,
+    "language": "English",
+    "pages": 304,
+    "rating": 4.2,
+    "reviews": [
+        {
+            "review_id": 1,
+            "reviewer": "John Doe",
+            "review_text": "A thought-provoking and engaging novel about second chances and the lives we live in our minds.",
+            "review_date": "2020-08-01",
+            "review_rating": 4
+        }
+    ]
+},
+{  "book_id": 3,
+    "title": "The Seven Husbands of Evelyn Hugo",
+    "author": "Taylor Jenkins Reid",
+    "image_url": "https://m.media-amazon.com/images/I/71pIEVU3EeL.jpg",
+    "description": "A captivating tale of a reclusive Hollywood icon who recounts her glamorous and scandalous life story to a young journalist.",
+    "genre": "Fiction, Romance",
+    "publication_year": 2017,
+    "language": "English",
+    "pages": 400,
+    "rating": 4.6,
+    "reviews": [
+        {
+            "review_id": 1,
+            "reviewer": "Jane Doe",
+            "review_text": "An enthralling read that beautifully captures the complexities of love, fame, and identity.",
+            "review_date": "2017-06-15",
+            "review_rating": 5
+        }
+    ]
+},
+{
+    "book_id": 3,
+    "title": "Tomorrow, and Tomorrow, and Tomorrow",
+    "author": "Gabrielle Zevin",
+    "image_url": "https://images.thalia.media/-/BF2000-2000/ae96b745a7c748c98373bdbb339a98c2/zevin-g-tomorrow-and-tomorrow-and-tomorrow-taschenbuch-gabrielle-zevin-englisch.jpeg",
+    "description": "A story about friendship, creativity, and video game design, following two friends over decades as they build worlds together and navigate love, loss, and fame.",
+    "genre": "Literary Fiction",
+    "publication_year": 2022,
+    "language": "English",
+    "pages": 416,
+    "rating": 4.7,
+    "reviews": [
+        {
+            "review_id": 1,
+            "reviewer": "Liam Carter",
+            "review_text": "A beautifully written and immersive journey through time, creativity, and human connection.",
+            "review_date": "2022-10-04",
+            "review_rating": 5
+        }
+    ]
+},
+{
+    "book_id": 4,
+    "title": "Pachinko",
+    "author": "Min Jin Lee",
+    "image_url": "https://images.thalia.media/-/BF2000-2000/5ce5899c53f2471ba9d2710cd1eaeb91/pachinko-taschenbuch-min-jin-lee-englisch.jpeg",
+    "description": "A sweeping saga of a Korean family across four generations, enduring hardship and discrimination in 20th-century Japan.",
+    "genre": "Historical Fiction",
+    "publication_year": 2017,
+    "language": "English",
+    "pages": 496,
+    "rating": 4.6,
+    "reviews": [
+        {
+            "review_id": 1,
+            "reviewer": "James Lee",
+            "review_text": "An epic and deeply human story that spans generations with elegance and emotional depth.",
+            "review_date": "2017-03-18",
+            "review_rating": 5
+        }
+    ]
+}
+]
