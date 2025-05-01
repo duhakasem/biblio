@@ -2,6 +2,8 @@ const express = require("express");
 const server = express();
 const port = 3001;
 
+server.use(express.static('public'));
+
 server.get("/", function (req, res) {
     res.send(`
         <h1>Welcome to the homepage!</h1>
