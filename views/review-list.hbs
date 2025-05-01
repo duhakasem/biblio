@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All Reviews</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav>Biblio</nav>
+
+    <div class="container">
+      <h1>All Reviews</h1>
+
+      {{#if reviews.length}}
+        <ul>
+          {{#each reviews}}
+            <li style="margin-bottom: 1.5rem;">
+              <strong>{{name}}</strong> rated: {{rating}}<br />
+              <em>{{review}}</em><br />
+              <small>{{timestampFormatted}}</small>
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>No reviews yet.</p>
+      {{/if}}
+
+      <p>
+        <a href="/review" style="padding: 0.5em 1em; background-color: #bd706a; color: white; text-decoration: none; border-radius: 4px;">➕ Write a review</a>
+      </p>
+    </div>
+  </body>
+</html>

@@ -4,84 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Biblio – Write a review</title>
-  <style>
-    body {
-    font-family: Georgia, serif;
-    margin: 0;
-    padding: 0;
-    background: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-    background-color: #fdfaf3;
-    background-repeat: repeat;
-    }
-
-    nav {
-      background-color: #fffcf5;
-      padding: 1rem;
-      color: #bd706a;
-      font-size: 2rem;
-      text-align: center;
-      font-weight: bold;
-      border-bottom: 2px solid #bd706a20;
-    }
-
-    .container {
-      padding: 2rem;
-      max-width: 600px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 0 12px rgba(0,0,0,0.05);
-      margin-top: 2rem;
-      border-radius: 8px;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 1rem;
-    }
-
-    textarea, input {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-family: Georgia, serif;
-    }
-
-    .stars {
-      display: flex;
-      flex-direction: row;
-      font-size: 2rem;
-      margin: 1rem 0;
-      cursor: pointer;
-    }
-
-    .star {
-      color: lightgray;
-      transition: color 0.2s;
-    }
-
-    .star.selected {
-      color: goldenrod;
-    }
-
-    button {
-      background-color: #bd706a;
-      color: white;
-      padding: 0.6rem 1rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 1rem;
-      font-family: Georgia, serif;
-    }
-
-    button:hover {
-      background-color: #f3d6c9;
-      color: #5c2e29;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 
@@ -110,24 +33,6 @@
       <button type="submit">Save</button>
     </form>
   </div>
-
-  <script>
-    const stars = document.querySelectorAll('.star');
-    const ratingInput = document.getElementById('rating');
-
-    stars.forEach(star => {
-      star.addEventListener('click', () => {
-        const rating = star.getAttribute('data-value');
-        ratingInput.value = rating;
-
-        stars.forEach(s => s.classList.remove('selected'));
-
-        for (let i = 0; i < rating; i++) {
-          stars[i].classList.add('selected');
-        }
-      });
-    });
-  </script>
-
+  <script src="/js/stars.js"></script>
 </body>
 </html>
