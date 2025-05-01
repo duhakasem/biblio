@@ -15,7 +15,7 @@ server.use(express.static("public"));
 
 server.get("/feed", function (req, res) {
     res.render("feed", { books });
-});;
+});
 
 server.listen(port, function () {
     console.log("Express listening on " + port);

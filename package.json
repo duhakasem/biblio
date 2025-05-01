@@ -11,7 +11,7 @@
   "license": "MIT",
   "description": "```bash\r npm init\r ```\r Follow the prompts to set up your package.json file.",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
     "express-handlebars": "^8.0.1"
   },
   "devDependencies": {
