@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblio – Write a review</title>
+</head>
+<body>
+
+  <nav>Biblio</nav>
+
+  <div class="container">
+    <h2>Write a Review</h2>
+
+    <form action="/save-review" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label>Rate this book</label>
+
+      <label for="review">Your Review</label>
+      <textarea id="review" name="review" rows="6" required></textarea>
+
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</body>
+</html>
