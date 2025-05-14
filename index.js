@@ -36,7 +36,7 @@ server.post('/save-review', (req, res) => {
     const timestamp = new Date();
     reviews.push({ name, rating, review, timestamp });
 
-    // ave updated reviews
+    // save updated reviews
     try {
         fs.writeFileSync(reviewsFile, JSON.stringify(reviews, null, 2));
     } catch (err) {
