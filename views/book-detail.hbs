@@ -1,0 +1,72 @@
+<style>
+.container {
+  display: flex;
+  gap: 40px;
+}
+
+.left-side {
+  flex: 1;
+}
+
+.right-side {
+  flex: 1;
+  position: relative;
+}
+
+.large-cover {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.add-review-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1969d2;
+  color: white;
+  font-size: 2rem;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.reviews-btn {
+  padding: 8px 15px;
+  background-color: #1969d2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+</style>
+
+<a href="/">← Back to all Books</a>
+
+<div class="container">
+  <div class="left-side">
+    <h1>{{book.title}}</h1>
+    <h3>by {{book.author}}</h3>
+    <p><strong>Genre:</strong> {{book.genre}}</p>
+    <p><strong>Published:</strong> {{book.publication_year}} | {{book.language}} | {{book.pages}} pages</p>
+
+    <h4>Description</h4>
+    <p>{{book.description}}</p>
+
+    <button class="reviews-btn">Reviews ({{book.reviews.length}})</button>
+
+    <p>
+      Average Rating:
+      {{#each (stars book.rating)}}
+        {{{this}}}
+      {{/each}}
+      ({{book.rating}}/5)
+    </p>
+  </div>
+
+  <div class="right-side">
+    <img src="{{book.image_url}}" alt="{{book.title}}" class="large-cover">
+    <button class="add-review-btn">＋</button>
+  </div>
+</div>
