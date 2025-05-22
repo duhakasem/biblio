@@ -97,3 +97,18 @@ server.listen(port, function () {
     console.log("Express listening on " + port);
 });
 
+server.get("/reviews/:id", (req, res) => {
+    const bookId = parseInt(req.params.id, 10);
+    const book = books.find(b => b.book_id === bookId);
+  
+    if (!book) {
+      return res.status(404).send("Book not found");
+    }
+  
+    res.render("reviews", { book });
+  });
+  
+
+server.listen(port, () => {
+    console.log("Express listening on " + port);
+});

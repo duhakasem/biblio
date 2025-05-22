@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wall of Love</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+ body {
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container-flex {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .left {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 20px;
+        }
+
+        .left h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .left p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .left img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .right {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .testimonial-section {
+            background-color: #E9D6C6;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .testimonial-section h3 {
+            font-weight: bold;
+        }
+
+        .testimonial-section img {
+            object-fit: cover;
+        }
+
+        .info-container {
+            border-radius: 8px;
+
+        }
+
+        #carouselExampleDark .carousel-inner {
+            background-color: #E9D6C6;
+            border-radius: 8px;
+        }
+
+        #carouselExampleDark .carousel-item {
+            padding: 20px;
+            background-color: #E9D6C6;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            filter: invert(1);
+        }
+
+
+        .left>*:not(:last-child),
+        .right>*:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        .info-container {
+            padding: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .left button {
+            margin-bottom: 15px;
+        }
+
+        .left img {
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .navbar {
+            margin-bottom: 30px;
+        }
+
+        .testimonial-section {
+            margin-top: 20px;
+        }
+
+        footer {
+            padding: 20px 0;
+        }  </style>
+</head>
+
+<body>
+
+  <div class="container-flex">
+    <!-- Left Column -->
+    <div class="left">
+      <h1>Wall of Love 📚₊˚⊹ 💗</h1>
+      <button type="button" class="btn btn-outline-light" style="background-color: #E3A4BD">Leave some Love</button>
+
+<div class="info-container" style="background-color:#cedd9e; padding: 1rem; border-radius: 8px;">
+  <h4>About the Book</h4>
+  <p><strong>Title:</strong> {{book.title}}</p>
+  <p><strong>Author:</strong> {{book.author}}</p>
+  <p><strong>Genre:</strong> {{book.genre}}</p>
+  <p><strong>Published:</strong> {{book.publication_year}}</p>
+  <p><strong>Description:</strong> {{book.description}}</p>
+  <a href="{{book.link}}" title="Go to more information" target="_blank" rel="noopener noreferrer">More Information</a>
+</div>
+
+
+      <img src="{{book.image}}" alt="Illustration" />
+    </div>
+
+    <!-- Right Column -->
+    <div class="right">
+      <div class="btn-group mb-3">
+        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Sort By
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item sort-option" href="#" data-rating="all">All Ratings</a></li>
+          <li><a class="dropdown-item sort-option" href="#" data-rating="5">5 Stars</a></li>
+          <li><a class="dropdown-item sort-option" href="#" data-rating="4">4 Stars</a></li>
+          <li><a class="dropdown-item sort-option" href="#" data-rating="3">3 Stars</a></li>
+        </ul>
+      </div>
+
+      <section class="testimonial-section">
+        <div class="row text-center">
+          <div class="col-md-12">
+            <!-- Carousel wrapper -->
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                {{#each reviews}}
+                  <div class="carousel-item {{#if @first}}active{{/if}}" data-rating="{{this.rating}}">
+                    <p class="lead font-italic mx-4 mx-md-5">"{{this.comment}}"</p>
+                    <div class="mt-5 mb-4">
+                      <img src="{{this.avatar}}" class="rounded-circle img-fluid shadow-1-strong" width="100" height="100" alt="Reviewer image" />
+                    </div>
+                    <p class="text-muted mb-0">{{this.user}}</p>
+                  </div>
+                {{/each}}
+              </div>
+
+              <!-- Controls -->
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+            <!-- Carousel wrapper -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Sorting functionality for carousel reviews
+    document.querySelectorAll('.sort-option').forEach(option => {
+      option.addEventListener('click', e => {
+        e.preventDefault();
+        const rating = option.getAttribute('data-rating');
+        const carouselInner = document.querySelector('#carouselExampleDark .carousel-inner');
+        const items = carouselInner.querySelectorAll('.carousel-item');
+
+        // Hide all items initially
+        items.forEach(item => item.style.display = 'none');
+
+        let visibleItems = [];
+
+        if (rating === 'all') {
+          visibleItems = Array.from(items);
+        } else {
+          visibleItems = Array.from(items).filter(item => item.getAttribute('data-rating') === rating);
+        }
+
+        visibleItems.forEach(item => item.style.display = 'block');
+
+        visibleItems.forEach((item, index) => {
+          if (index === 0) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+
+        if (visibleItems.length === 0) {
+          carouselInner.innerHTML = `<div class="carousel-item active"><p class="lead font-italic mx-4 mx-md-5">No reviews found for this rating.</p></div>`;
+        }
+      });
+    });
+  </script>
+
+</html>

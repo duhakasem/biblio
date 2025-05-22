@@ -1,4 +1,4 @@
-FROM node:current
+FROM node:23.11
 WORKDIR /home/node
 COPY package.json package-lock.json /home/node/
 EXPOSE 3002
