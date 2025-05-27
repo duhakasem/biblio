@@ -4,7 +4,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js && open http://localhost:3001/feed",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Duha Kasem, Nhi Phan, Santiago Badaya Prieto, Vanessa Pest",
