@@ -54,7 +54,9 @@
     <h4>Description</h4>
     <p>{{book.description}}</p>
 
-    <button class="reviews-btn">Reviews ({{book.reviews.length}})</button>
+    <a href="/reviews/{{../book_id}}">
+      <button class="reviews-btn">Reviews ({{book.reviews.length}})</button>
+    </a>
 
     <p>
       Average Rating:
@@ -67,6 +69,8 @@
 
   <div class="right-side">
     <img src="{{book.image_url}}" alt="{{book.title}}" class="large-cover">
+    <a href="/review">
     <button class="add-review-btn">＋</button>
+    </a>
   </div>
 </div>
