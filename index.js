@@ -1,114 +1,115 @@
 import express from "express";
-import { create} from "express-handlebars"; 
-import path from "path";
+import { create } from "express-handlebars";
 import fs from "fs";
+import path from 'path';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
+//nhi
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
-const server = express();
+const app = express();
 const port = 3001;
 
-const books = JSON.parse(fs.readFileSync("./public/library.json", "utf-8"));
-const reviewsFile = path.join(__dirname, './public/reviews.json');
+//const books = JSON.parse(fs.readFileSync("./public/library.json", "utf-8"));
+
+const books = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'library.json'), "utf-8"));
+
+
 
 const hbs = create({
-    extname: ".hbs",
-  defaultLayout: "main",
-  layoutsDir: path.join(__dirname, "views/layouts"),
     helpers: {
-        stars: (rating) => {
-          const fullStars = Math.round(rating);
-          let starsHtml = '';
-          for(let i = 0; i < 5; i++) {
-            starsHtml += i < fullStars ? '★' : '☆';
-          }
-          return starsHtml.split('');
+        formatDate: function (dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        },
+        stars: function (rating) {
+            if (!rating) return '';
+            let stars = '';
+            for (let i = 0; i < 5; i++) {
+                stars += i < rating ? '★' : '☆';
+            }
+            return stars;
         }
-      }
+    }
+});
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
+app.use('/static', express.static(path.join(__dirname, 'public')));
+
+
+// Main feed route
+app.get('/', (req, res) => {
+    res.render('feed', { books });
 });
 
-server.engine("hbs", hbs.engine);
-server.set("view engine", "hbs");
-server.set("views", "./views");
-
-server.use(express.urlencoded({ extended: true }));
-server.use(express.static("public"));
-
-server.get("/", (req, res) => {
-    res.send(`
-      <h1>Welcome to Biblio!</h1>
-      <p><a href="/feed">Go to Feed</a></p>
-    `);
-  });
-
-// Duha´s route for the landing page or feed
-server.get("/feed", function (req, res) {
-    res.render("feed", { books });
-});
-
-// Santiago´s route for the book selection
-server.get('/books/:id', function(req, res) {
-    const bookId = parseInt(req.params.id);
+app.get('/reviews/:bookId', (req, res) => {
+    const bookId = parseInt(req.params.bookId);
     const book = books.find(b => b.book_id === bookId);
 
-    if (book) {
-        res.render('book-detail', { book });
-    } else {
-        res.status(404).send('Book not found');
-    }
-});
-
-server.get("/review", function (req, res) {
-    res.render("personalrev");
-});
-
-server.post('/save-review', (req, res) => {
-    const { name, rating, review } = req.body;
-    let reviews = [];
-    try {
-        const data = fs.readFileSync(reviewsFile, 'utf8');
-        reviews = JSON.parse(data);
-    } catch (err) {
-        console.error('Error reading reviews: ', err);
-    }
-
-    const timestamp = new Date();
-    reviews.push({ name, rating, review, timestamp });
-
-    try {
-        fs.writeFileSync(reviewsFile, JSON.stringify(reviews, null, 2));
-    } catch (err) {
-        console.error('Error writing reviews: ', err);
-    }
-
-    // thank-you page
-    res.render('review-thanks', { name, rating, review });
-});
-
-server.get("/hello", function (req, res) {
-    res.send("Hello IMIs!");
-});
-
-
-server.listen(port, function () {
-    console.log("Express listening on " + port);
-});
-
-server.get("/reviews/:id", (req, res) => {
-    const bookId = parseInt(req.params.id, 10);
-    const book = books.find(b => b.book_id === bookId);
-  
     if (!book) {
-      return res.status(404).send("Book not found");
+        return res.status(404).render('404', { message: 'Book not found' });
     }
-  
-    res.render("reviews", { book });
-  });
-  
 
-server.listen(port, () => {
-    console.log("Express listening on " + port);
+    // Transform reviews with formatted dates
+    const transformedReviews = book.reviews ? book.reviews.map(review => {
+        const reviewDate = new Date(review.review_date);
+        const formattedDate = reviewDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        return {
+            ...review,
+            formatted_date: formattedDate,
+            stars: '★'.repeat(review.review_rating) + '☆'.repeat(5 - review.review_rating),
+            avatar: getRandomAvatar()
+        };
+    }) : [];
+
+    res.render('reviews', {
+        book: {
+            ...book,
+            reviews: transformedReviews,
+            link: `https://www.google.com/search?q=${encodeURIComponent(book.title + ' ' + book.author)}`
+        }
+    });
+});
+
+
+// Default reviews route (first book)
+app.get('/reviews', (req, res) => {
+    res.redirect(`/reviews/${books[0].book_id}`);
+});
+
+
+
+
+
+function getRandomAvatar() {
+    const avatars = [
+        "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp",
+        "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp",
+        "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
+    ];
+    return avatars[Math.floor(Math.random() * avatars.length)];
+}
+
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+
+    // Debug: List all routes after server is ready
+    console.log('Available routes:');
+    app._router.stack.forEach((r) => {
+        if (r.route && r.route.path) {
+            console.log(r.route.path);
+        }
+    });
 });
