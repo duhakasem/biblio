@@ -88,6 +88,54 @@ server.post('/save-review', (req, res) => {
     res.render('review-thanks', { name, rating, review });
 });
 
+server.get('/reviews/:bookId', (req, res) => {
+  const bookId = parseInt(req.params.bookId);
+  const book = books.find(b => b.book_id === bookId);
+
+  if (!book) {
+      return res.status(404).render('404', { message: 'Book not found' });
+  }
+
+  // Transform reviews with formatted dates
+  const transformedReviews = book.reviews ? book.reviews.map(review => {
+      const reviewDate = new Date(review.review_date);
+      const formattedDate = reviewDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+      });
+
+      return {
+          ...review,
+          formatted_date: formattedDate,
+          stars: '★'.repeat(review.review_rating) + '☆'.repeat(5 - review.review_rating),
+          avatar: getRandomAvatar()
+      };
+  }) : [];
+
+  res.render('reviews', {
+      book: {
+          ...book,
+          reviews: transformedReviews,
+          link: `https://www.google.com/search?q=${encodeURIComponent(book.title + ' ' + book.author)}`
+      }
+  });
+});
+
+// Default reviews route (first book)
+server.get('/reviews', (req, res) => {
+  res.redirect(`/reviews/${books[0].book_id}`);
+});
+
+function getRandomAvatar() {
+  const avatars = [
+      "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp",
+      "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp",
+      "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
+  ];
+  return avatars[Math.floor(Math.random() * avatars.length)];
+}
+
 server.get("/hello", function (req, res) {
     res.send("Hello IMIs!");
 });
